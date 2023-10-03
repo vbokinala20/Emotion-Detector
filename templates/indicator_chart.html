@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Emotions Detection</title>
+    <!-- import plugin script -->
+    <script src='static/Chart.min.js'></script>
+  </head>
+  <body>
+    <h1>Emotions Dectected</h1>
+    <!-- bar chart canvas element -->
+
+    <canvas id="doughnut-chart" width="500" height="350"> </canvas>
+       <script>
+      Chart.defaults.global.responsive = false;
+          new Chart(document.getElementById("doughnut-chart"), {
+              type: 'doughnut',
+              data: {
+                labels:  [{% for item in labels %}
+                             "{{item}}",
+                            {% endfor %}],
+                datasets: [
+                  {
+                    label: "Indicator",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: [{% for item in values %}
+                                {{item}},
+                              {% endfor %}],
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: 'Emotions Indicator'
+                }
+              }
+          });
+
+    </script>
+
+  </body>
+</html>
